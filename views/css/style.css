@@ -2,9 +2,9 @@
 
 
 :root {
-    --DARK-GREEN: hsl(181, 98%, 16%);
+    --DARK-GREEN: hsl(181, 100%, 22%);
     --LIGHT-GREEN: hsl(208, 100%, 97%);
-    --WHITE: #fefefb;
+    --WHITE: #FEFEFA;
     --BLACK: rgb(44, 44, 44);
     --BACKGROUND-COLOR2: hsl(0, 0%, 96%);
 }
@@ -78,7 +78,8 @@ nav a {
     border-bottom: 4px solid transparent;
 }
 
-nav a:hover {
+nav a.hover,
+.nav-active {
     border-bottom-color:  var(--DARK-GREEN);
 }
 
@@ -125,7 +126,7 @@ header a {
 
 /* HERO STYLE */
 #hero {
-  background: url(./views/img/hero\ background.png) 50% / cover no-repeat;
+  background: url(../img/hero\ background.png) 50% / cover no-repeat;
   height: 500px;
 }
 
@@ -367,7 +368,7 @@ header a {
     width: 420px;
     height: 420px;
     border-radius: 100%;
-    background: url(./views/img/img3.jpg) var(--LIGHT-GREEN) 50% / cover no-repeat;
+    background: url(../img/img3.jpg) var(--LIGHT-GREEN) 50% / cover no-repeat;
     align-self: center;
     margin-left: 5rem;
 }
