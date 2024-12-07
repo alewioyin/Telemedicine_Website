@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 
 // SET UP MIDDLEWARE
-app.use(express.static("views"));
+app.use(express.static("index.html"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:  true}));
 
@@ -31,31 +31,17 @@ app.use(session({
     }
 }));
 
+//LANDING PAGE
+    app.get('/', (req, res) =>{
+        res.sendFile(path.join(__dirname, 'index.html'))
+    })
+
 
 //DEFINE ROUTES
 app.use('/telemedicine/api/patients', require('./routes/patientRoutes'));
 app.use('/telemedicine/api/doctors', require('./routes/doctorRoutes'));
 /* app.use('/telemedicine/api/appointments', require('./routes/appointmentRoutes')); */
 app.use('/telemedicine/api/admin', require('./routes/adminRoutes'));
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/views/index.html'))
-})
-app.get('/patients', (req, res) => {
-    res.sendFile(path.join(__dirname,  'views/patients/index.html'));
-});
-
-app.get('/doctors', (req, res) => {
-    res.sendFile(path.join(__dirname,  'views/doctors/doctor.html'));
-});
-
-/* app.get('/appointments', (req, res) => {
-    res.sendFile(path.join(__dirname,  'views/appointments/appointments.html'));
-}); */
-
-app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname,  'views/admin/admin.html'));
-});
 
 
 //CRUD OPERATIONS
