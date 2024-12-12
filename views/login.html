@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeleMed - Login</title>
+    <title>TeleMedi - Login</title>
     <link rel="shortcut icon" href="./img/Head-Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/register.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class="opacity"></div>
@@ -68,7 +69,10 @@
         
                     <div class="details">
                         <label>Password <span>*</span></label>
-                        <input type="password" name="patientPassword" id="patientPassword" placeholder="Password">
+                        <div class="loginPasswordContainer patientPasswordContainer">
+                            <input type="password" name="patientPassword" id="patientPassword" placeholder="Password">
+                            <i class='bx bx-show hide-show' data-toggle="#patientPassword"></i>
+                        </div>
                         <span class="message patientPasswordMsg"></span>
                     </div>
     
@@ -86,7 +90,10 @@
 
                     <div class="details">
                         <label> Password <span>*</span></label> 
-                        <input type="password" name="doctorPassword" id="doctorPassword" placeholder="Password">
+                        <div class="loginPasswordContainer doctorPasswordContainer">
+                            <input type="password" name="doctorPassword" id="doctorPassword" placeholder="Password">
+                            <i class='bx bx-show hide-show' data-toggle="#doctorPassword"></i>
+                        </div>
                         <span class="message doctorPasswordMsg"></span>
                     </div>
                     <button type="button" id="doctorloginBtn" onclick="doctorLogin()">Login</button>
@@ -102,7 +109,10 @@
 
                     <div class="details">
                         <label> Password <span>*</span></label> 
-                        <input type="password" name="adminPassword" id="adminPassword" placeholder="Password">
+                        <div class="loginPasswordContainer adminPasswordContainer">
+                            <input type="password" name="adminPassword" id="adminPassword" placeholder="Password">
+                            <i class='bx bx-show hide-show' data-toggle="#adminPassword"></i>
+                        </div>
                         <span class="message adminPasswordMsg"></span>
                     </div>
                     <button type="button" id="adminLoginBtn" onclick="adminLogin()">Login</button>

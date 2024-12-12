@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeleMed - Registration</title>
+    <title>TeleMedi - Registration</title>
     <link rel="stylesheet" href="./css/register.css">
     <link rel="shortcut icon" href="./img/Head-Logo.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class="opacity"></div>
@@ -52,11 +53,13 @@
                 
                 <div class="role-tabs">
                         <button type="button" class="role-tab active" data-role="patient" id="patientRegBtn">Patient</button>
+                        <button type="button" class="role-tab" data-role="doctor" id="doctorRegBtn">Doctor</button>
                         <button type="button" class="role-tab" data-role="admin" id="adminRegBtn">Admin</button>
                 </div>
 
                 <input type="hidden" name="role" id="user-role" value="patient">
 
+                <!-- PATIENT REGISTRATION START -->
                 <div id="patientForm">
                     <div class="name">
                         <div class="details">
@@ -89,13 +92,21 @@
                     <div class="password">
                         <div class="details">
                             <label>Password <span>*</span></label>
-                            <input type="password" name="password" id="password" placeholder="Password">
+                            <div class="patientPasswordContainer registerPasswordContainer">
+                                <input type="password" name="password" id="password"  class="passwordInputs" placeholder="Password"> 
+                                <i class='bx bx-show hide-show' data-toggle="#password"></i>
+                            </div>
+                            
                             <span class="message passwordMessage"></span>
                         </div>
     
                         <div class="details">
                             <label>Confirm Password <span>*</span></label>
-                            <input type="password" name="cPassword" id="cPassword" placeholder="Confirm password">
+                            <div class="patientCpasswordContainer registerPasswordContainer">
+                                <input type="password" name="cPassword" id="cPassword" class="passwordInputs" placeholder="Confirm password">
+                                <i class='bx bx-show hide-show' data-toggle="#cPassword"></i>
+                            </div>
+                            
                             <span class="message cpMessage"></span>
                         </div>
                     </div>
@@ -133,9 +144,39 @@
     
                     <button type="button" id="patientRegisterBtn" onclick="registerPatient()">Register</button>
                 </div>
+                <!-- PATIENT REGISTRATION END -->
 
+                <!-- DOCTOR REGISTRATION START -->
+                 <div id="doctorForm">
+                    <div class="details">
+                        <label>Email Address <span>*</span></label>
+                        <input type="text" name="doctorEmail" id="doctorEmail" placeholder="Email address">
+                        <span class="message doctorEmailMsg"></span>
+                    </div>
 
-                <!-- ADMIN INPUT FIELD -->
+                    <div class="details">
+                        <label>Password <span>*</span></label>
+                        <div class="registerPasswordContainer doctorPasswordContainer">
+                            <input type="password" name="doctorPassword" id="doctorPassword" placeholder="Enter password">
+                            <i class='bx bx-show hide-show' data-toggle="#doctorPassword"></i>
+                        </div>
+                        <span class="message doctorPasswordMsg"></span>
+                    </div>
+
+                    <div class="details">
+                        <label>Confirm Password <span>*</span></label>
+                        <div class="registerPasswordContainer doctorCpasswordContainer">
+                            <input type="password" name="doctorcPassword" id="doctorcPassword" placeholder="Confirm password">
+                            <i class='bx bx-show hide-show' data-toggle="#doctorcPassword"></i>
+                        </div>
+                        <span class="message doctorcPasswordMsg"></span>
+                    </div>
+
+                    <button type="button" id="doctorRegistrationBtn" onclick="registerDoctor()">Register</button>
+                 </div>
+                <!-- DOCTOR REGISTRATION END -->
+
+                <!-- ADMIN REGISTRATION START -->
                  <div id="adminForm">
                     <div class="details">
                         <label> Username <span>*</span></label>
@@ -145,13 +186,19 @@
 
                     <div class="details">
                         <label> Password <span>*</span></label> 
-                        <input type="password" name="password_hash" id="password_hash" placeholder="Enter password">
+                        <div class="registerPasswordContainer adminPasswordContainer">
+                            <input type="password" name="password_hash" id="password_hash" placeholder="Enter password">
+                            <i class='bx bx-show hide-show' data-toggle="#password_hash"></i>
+                        </div>
                         <span class="message adminPasswordMessage"></span>
                     </div>
 
                     <div class="details">
                         <label>Confirm Password <span>*</span></label>
-                        <input type="password" name="cPassword" class="cPassword" placeholder="Confirm password">
+                        <div class="adminCpasswordContainer registerPasswordContainer">
+                            <input type="password" name="cPassword" id="adminCpassword" placeholder="Confirm password">
+                            <i class='bx bx-show hide-show' data-toggle="#adminCpassword"></i>
+                        </div>
                         <span class="message admincpMessage"></span>
                     </div>
              
@@ -162,12 +209,12 @@
                         </select>
                     </div>
                     <button type="button" id="adminRegisterBtn" onclick="adminRegistration()">Register</button>
-                 </div> 
+                </div> 
+                <!-- ADMIN REGISTRATION ENDS -->
             </form>
         </div>    
     </div>
 
-    
-     <script src="./js/register.js"></script>
+    <script src="./js/register.js"></script>
 </body>
 </html>

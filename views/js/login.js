@@ -46,6 +46,7 @@ document.querySelectorAll('.role-tab').forEach(tab => {
 const loginForm = document.getElementById('loginForm');
 const patientEmailInput = document.getElementById('patientEmail');
 const patientPasswordInput = document.getElementById('patientPassword');
+const patientPasswordContainer = document.querySelector('.patientPasswordContainer');
 const patientEmailMsg = document.querySelector('.patientEmailMsg');
 const patientPasswordMsg = document.querySelector('.patientPasswordMsg');
 const successNotification = document.getElementById('successNotification');
@@ -75,11 +76,11 @@ async function loginPatient() {
 
     //check password
     if (password === '') {
-        patientPasswordInput.classList.add('errors');
+        patientPasswordContainer.classList.add('errors');
         patientPasswordMsg.textContent = 'Password cannot be empty';
         isValid = false;
     }  else {
-        patientPasswordInput.classList.remove('errors');
+        patientPasswordContainer.classList.remove('errors');
         patientPasswordMsg.textContent = '';
     };
 
@@ -132,11 +133,11 @@ async function loginPatient() {
     });
 
     patientPasswordInput.addEventListener('input', () => {
-        if (patientPasswordInput.value.trim().length < 8) {
-            patientPasswordInput.classList.add('errors');
+        if (patientPasswordInput.value.length < 8) {
+            patientPasswordContainer.classList.add('errors');
             patientPasswordMsg.textContent = 'Password must be at least 8 characters long';
         }  else {
-            patientPasswordInput.classList.remove('errors');
+            patientPasswordContainer.classList.remove('errors');
             patientPasswordMsg.textContent = '';
         }
     });
@@ -146,6 +147,7 @@ async function loginPatient() {
 /* DOCTOR VALIDATION */
     const doctorEmailInput = document.getElementById('doctorEmail');
     const doctorPasswordInput = document.getElementById('doctorPassword');
+    const doctorPasswordContainer = document.querySelector('.doctorPasswordContainer');
     const doctorEmailMsg = document.querySelector('.doctorEmailMsg');
     const doctorPasswordMsg = document.querySelector('.doctorPasswordMsg');
     
@@ -167,11 +169,11 @@ async function loginPatient() {
 
         //check password
         if (doctorPassword === '') {
-            doctorPasswordInput.classList.add('errors');
+            doctorPasswordContainer.classList.add('errors');
             doctorPasswordMsg.textContent = 'Password cannot be empty';
             isValid = false;
         }  else {
-            doctorPasswordInput.classList.remove('errors');
+            doctorPasswordContainer.classList.remove('errors');
             doctorPasswordMsg.textContent = '';
         };
 
@@ -181,7 +183,7 @@ async function loginPatient() {
                 headers: {
                     'Content-Type' : 'application/json'
                 },
-                body: JSON.stringify({ email })
+                body: JSON.stringify({ email: email, password: doctorPassword})
             });
 
             const result = await response.json();
@@ -222,11 +224,11 @@ async function loginPatient() {
     });
 
     doctorPasswordInput.addEventListener('input', () => {
-        if (doctorPasswordInput.value.trim().length < 8) {
-            doctorPasswordInput.classList.add('errors');
+        if (doctorPasswordInput.value.length < 8) {
+            doctorPasswordContainer.classList.add('errors');
             doctorPasswordMsg.textContent = 'Password must be at least 8 characters long';
         }  else {
-            doctorPasswordInput.classList.remove('errors');
+            doctorPasswordContainer.classList.remove('errors');
             doctorPasswordMsg.textContent = '';
         }
     });
@@ -236,6 +238,7 @@ async function loginPatient() {
 /* ADMIN VALIDATION */
     const adminUsernameInput = document.getElementById('username');
     const adminPasswordInput = document.getElementById('adminPassword');
+    const adminPasswordContainer = document.querySelector('.adminPasswordContainer');
     const adminUsernameMsg = document.querySelector('.adminUsernameMsg');
     const adminPasswordMsg = document.querySelector('.adminPasswordMsg');
 
@@ -255,10 +258,10 @@ async function loginPatient() {
         };
 
         if (adminPassword === "") {
-            adminPasswordInput.classList.add('errors');
+            adminPasswordContainer.classList.add('errors');
             adminPasswordMsg.textContent = 'Password cannot be empty';
         } else {
-            adminPasswordInput.classList.remove('errors');
+            adminPasswordContainer.classList.remove('errors');
             adminPasswordMsg.textContent = '';
         };
 
@@ -299,11 +302,28 @@ async function loginPatient() {
 
     //REAL TIME FEEDBACK FOR ADMIN LOGIN
     adminPasswordInput.addEventListener('input', () => {
-        if (adminPasswordInput.value.trim().length < 8 ) {
-            adminPasswordInput.classList.add('errors');
+        if (adminPasswordInput.value.length < 8 ) {
+            adminPasswordContainer.classList.add('errors');
             adminPasswordMsg.textContent = 'Password must be at least 8 characters long';
         } else {
-            adminPasswordInput.classList.remove('errors');
+            adminPasswordContainer.classList.remove('errors');
             adminPasswordMsg.textContent = '';
         }
     });
+
+
+    // HIDE AND SHOW PASSWORD
+const showHidePasswordAll = document.querySelectorAll ('.hide-show');
+
+showHidePasswordAll.forEach((icon) => {
+    icon.addEventListener('click', () => {
+        const input = document.querySelector(icon.getAttribute('data-toggle'));
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('bx-show', 'bx-hide');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('bx-hide', 'bx-show');
+        }
+    });
+});

@@ -1,4 +1,5 @@
 const db = require('../config/database');
+const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 
 //ADD DOCTOR
@@ -30,20 +31,59 @@ exports.addDoctor = async (req, res) => {
     }
 };
 
+exports.registerDoctor = async (req, res) => {
+    const errors = validationResult(req);
+
+    //check if any error is present in validation
+    if (!errors.isEmpty()) {
+        return res.status(401).json({ message: 'Please correct input errors', errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+
+    //fetch input parameter
+    try {
+        const [doctor] = await db.execute('SELECT email, password FROM doctors WHERE email = ?', [email]);
+
+        //if doctor does not exist
+        if (doctor.length === 0) {
+            return res.status(400).json({ message: 'Doctor not found. Please contact the admin.'});
+        }
+
+        //check if password has been set already
+        if (doctor[0].password) {
+            return res.status(400).json({ message: 'Password has already been set.'});
+        }
+        //hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await db.execute('UPDATE doctors SET password = ? WHERE email = ?', 
+            [ hashedPassword, email]      
+        )
+
+        //response
+        res.status(200).json({ message: 'Doctor registered successfully.' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error registering doctor', error: error.message });
+    }
+    
+}
+
 //LOGIN DOCTOR
 exports.loginDoctor = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const [doctor] = await db.execute('SELECT * FROM doctors WHERE email =?', [email]);
+        const [doctor] = await db.execute('SELECT * FROM doctors WHERE email = ?', [email]);
         
         if (doctor.length === 0) {
             return res.status(401).json({ message: 'Doctor not found'});
         }
         
-       /*  const isMatch = await bcrypt.compare(password, doctor[0].password);
+        const isMatch = await bcrypt.compare(password, doctor[0].password);
         
-        if (!isMatch) return res.status(400).json({ message: 'Invalid email/password combinations.' }); */
+        if (!isMatch) return res.status(400).json({ message: 'Invalid email/password combinations.' });
         
         //create session
         req.session.doctorId = doctor[0].id;

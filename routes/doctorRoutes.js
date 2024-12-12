@@ -1,7 +1,7 @@
 const express = require('express');
 const {check} = require('express-validator');
 const router = express.Router();
-const { addDoctor, loginDoctor, getAllDoctors, getDoctor, updateDoctor, deleteDoctor } = require('../controllers/doctorsController');
+const { addDoctor, registerDoctor, loginDoctor, getAllDoctors, getDoctor, updateDoctor, deleteDoctor } = require('../controllers/doctorsController');
 
 //ADD OR SAVE NEW DOCTOR ROUTE
 router.post('/addDoctor', 
@@ -14,12 +14,22 @@ router.post('/addDoctor',
     addDoctor
 );
 
-router.post('/login', 
+// REGISTER DOCTOR ROUTE
+router.post('/register', 
     [
         check('email', 'Please enter a valid email address').isEmail(),
+        check('password', 'Password must be at least 8 characters long').isLength({ min: 8 })
+    ],
+    registerDoctor
+);
+
+// LOGIN DOCTOR ROUTE
+router.post('/login', 
+    [
+        check('email', 'Please enter a valid email address').isEmail()
     ],
     loginDoctor
-)
+);
 
 //SHOW ALL DOCTORS ROUTE
 router.get('/allDoctors', getAllDoctors);

@@ -14,6 +14,7 @@ const app = express();
 
 // SET UP MIDDLEWARE
 app.use(express.static("index.html"));
+app.use(express.static("views"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:  true}));
 
@@ -75,6 +76,7 @@ app.get('/createDoctorsTable', (req, res) => {
         last_name VARCHAR(100) NOT NULL,
         specialization VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
+        password VARCHAR(100) NOT NULL,
         phone VARCHAR(15),
         schedule TEXT
     )`

@@ -95,7 +95,7 @@ header a {
 
 .cta a{
     padding: 6px 16px;
-    border-radius: 12px;
+    border-radius: 16px;
     border: none;
     outline: none;
     background-color: transparent;
@@ -181,7 +181,7 @@ header a {
     display: flex;
     align-items: center;
     margin-top: 4.5rem;
-    gap: 32px;
+    gap: 5rem;
 }
 
 .statistics h4 {
@@ -234,11 +234,10 @@ header a {
 .service {
     width: 240px;
     height: 200px;
-    padding: 40px 8.5px 28px 12px;
-    text-align: center;
+    padding: 0 0.75rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     gap: 20px;
     border-radius: 20px;
@@ -261,7 +260,7 @@ header a {
     font-size: 12px;
     line-height: 16px;
     text-align: center;
-    width: 200px;
+    width: 93%;
 }
 
 
